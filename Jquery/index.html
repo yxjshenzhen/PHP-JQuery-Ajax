@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery/jquery-1.11.1.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+
+    $("div").animate({right:'0px'},'normal');
+    //$("#p1").animate({fontSize:'20px'},1000);
+	//$("#p1").animate({fontSize:'10px'},1000);
+	//$("#p2").animate({fontSize:'20px'},1000);
+	//$("#p2").animate({fontSize:'10px'},1000);
+	//$("#p3").animate({fontSize:'20px'},1000);
+	//$("#p3").animate({fontSize:'10px'},1000);
+ 
+	$("#p1").click(function(){
+		$("#p1").animate({fontSize:'15px'});
+		$("#p2").animate({fontSize:'10px'});
+		$("#p3").animate({fontSize:'10px'});
+		
+		$.get("get.php/device",function(data,status){
+				//alert("Data: " + data + "\nStatus: " + status);
+				var jsonData = eval(data);//接收到的数据转化为JQuery对象，由JQuery为我们处理
+				//alert(jsonData.length);
+				$("#div2").empty();
+				for(var i =0 ;i<jsonData.length;i++){
+					$("#div2").append(
+					"<span>设备ID：</span>"+jsonData[i].id+"&nbsp;&nbsp;<span>设备名称：</span>"+jsonData[i].title+"</br>");
+				}
+				 
+			});
+ 
+		$("#div2").show(500);
+		//if($('#div2').css('display')=='none'){
+			//$('#div2').css('display','block');
+			//$("#div2").animate({right:'200px'},'normal');
+		//}
+		$("#div3").hide();
+		$("#div4").hide();
+		
+	});
+	$("#p2").click(function(){
+
+		$("#p2").animate({fontSize:'15px'});
+		$("#p1").animate({fontSize:'10px'});
+		$("#p3").animate({fontSize:'10px'});
+		$("#div3").show(500);
+		$("#div2").hide();
+		$("#div4").hide();
+	});
+	$("#p3").click(function(){
+		$("#p3").animate({fontSize:'15px'});
+		$("#p2").animate({fontSize:'10px'});
+		$("#p1").animate({fontSize:'10px'});
+		$("#div4").show(500);
+		$("#div3").hide();
+		$("#div2").hide();
+	});
+});
+
+</script> 
+</head>
+ 
+<body style="margin:0px">
+
+<div style="background:FFFFFF;height:100%;width:100%;position:absolute;font-size:10px;margin-left:0px;">
+	
+	<div style="float:top;background:gray;height:15%;width:100%;">
+		header
+	</div>
+	
+	<div id="div10" style="float:left;background:FFFFFF;height:70%;width:100%;">
+		<div id="div1" style="float:left;background:FFFFFF;height:100%;width:10%;">
+			<li id="p1">设备列表</p>
+			<li id="p2">用户中心</p>
+			<li id="p3">管理中心</p>
+		</div>
+
+		<div id="div2" style="float:right;background:FFFFFF;height:100%;width:90%;display:none;">
+		</div>
+		<div id="div3" style="float:right;background:FFFFFF;height:100%;width:90%;display:none;">
+			用户中心
+		</div>
+		<div id="div4" style="float:right;background:FFFFFF;height:100%;width:90%;display:none;">
+			管理中心
+		</div>
+	</div>
+	
+	<div style="float:right;background:gray;height:15%;width:100%;">
+		footer
+	</div>
+	
+</div>
+
+</body>
+</html>
